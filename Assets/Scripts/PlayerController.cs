@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,33 +9,40 @@ public class PlayerController : MonoBehaviour
     private InputActionMap player;
     private InputAction movement;
     private InputAction looking;
+    public PlayerInputManager playerInputManager;
 
     public Transform playerBody;
     public Transform playerGroundCheck;
     public Camera cam;
     public LayerMask groundMask;
     public CharacterController controller;
-    public float mouseSensitivity = 70f;
+    public float mouseSensitivity = 60f;
     private float xRotation = 0f;
-    public float groundDistance = 0.4f; //radius of sphere going to check to see if on ground
-    public float speed = 12f;
-    public float gravity = -9.81f * 2; //towards 0 = slower fall, further negative = faster fall
-    public float jumpHeight = 1.5f * 1;
+    private float groundDistance = 0.4f; //radius of sphere going to check to see if on ground
+    private float speed = 9f;
+    private float gravity = -9.81f * 2; //towards 0 = slower fall, further negative = faster fall
+    private float jumpHeight = 1.5f;
     bool isGrounded;
-
     Vector3 velocity;
+
+    private List<PlayerInput> players = new List<PlayerInput>();
 
     private void Awake() {
         //note: inputAction asset is not static or global
         inputAsset = this.GetComponent<PlayerInput>().actions;
         player = inputAsset.FindActionMap("Player");
+        playerInputManager = FindObjectOfType<PlayerInputManager>();
+        
     }
 
     private void OnEnable() {
-        player.FindAction("Jump").started += DoJump; //subscribe to event
         player.Enable();
+        
+        player.FindAction("Jump").started += DoJump; //subscribe to event
         movement = player.FindAction("Movement");
         looking = player.FindAction("Looking");
+
+        playerInputManager.onPlayerJoined += AddPlayer;
     }
 
     private void OnDisable() {
@@ -81,5 +89,17 @@ public class PlayerController : MonoBehaviour
         controller.Move(move * speed * Time.deltaTime);
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+    
+    private void AddPlayer(PlayerInput player) {
+        if(players.Count == 0) {
+            player.transform.GetChild(0).gameObject.SetActive(true);
+            player.transform.GetChild(1).gameObject.SetActive(false);
+        }
+        else {
+            player.transform.GetChild(1).gameObject.SetActive(true);
+            player.transform.GetChild(0).gameObject.SetActive(false);
+        }
+        players.Add(player);
     }
 }
