@@ -92,13 +92,14 @@ public class PlayerController : MonoBehaviour
     }
     
     private void AddPlayer(PlayerInput player) {
-        if(players.Count == 0) {
-            player.transform.GetChild(0).gameObject.SetActive(true);
-            player.transform.GetChild(1).gameObject.SetActive(false);
+        if(players.Count == 0) { //when the game starts this runs
+            player.transform.GetChild(0).gameObject.SetActive(true); //turn on Almanac model
+            player.transform.GetChild(1).gameObject.SetActive(false); //turn off Zasshi model
         }
-        else {
-            player.transform.GetChild(1).gameObject.SetActive(true);
-            player.transform.GetChild(0).gameObject.SetActive(false);
+        else { //when a second player enters the game, run these
+            player.transform.GetChild(1).gameObject.SetActive(true); //turn on Zasshi model
+            player.transform.GetChild(0).gameObject.SetActive(false); //turn off Almanac model
+            
         }
         players.Add(player);
     }
