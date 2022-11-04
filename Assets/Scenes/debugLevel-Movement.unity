@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: f13a6219682f36d408baf1371831897c, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -592,6 +592,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 911548435801935404, guid: 275c8cb4e3ff1c145a9198d184562ec9, type: 3}
   m_PrefabInstance: {fileID: 911548437274391922}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1489304422 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 911548435801935380, guid: 275c8cb4e3ff1c145a9198d184562ec9, type: 3}
+  m_PrefabInstance: {fileID: 911548437274391922}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1707272142
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,9 +836,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 29011338678734456, guid: 275c8cb4e3ff1c145a9198d184562ec9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 29011338725425626, guid: 275c8cb4e3ff1c145a9198d184562ec9, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 805230657147001696, guid: 275c8cb4e3ff1c145a9198d184562ec9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 911548435801935380, guid: 275c8cb4e3ff1c145a9198d184562ec9, type: 3}
       propertyPath: m_RootOrder
@@ -879,6 +892,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 911548435801935382, guid: 275c8cb4e3ff1c145a9198d184562ec9, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 911548435801935383, guid: 275c8cb4e3ff1c145a9198d184562ec9, type: 3}
+      propertyPath: playerBody
+      value: 
+      objectReference: {fileID: 1489304422}
+    - target: {fileID: 911548435801935383, guid: 275c8cb4e3ff1c145a9198d184562ec9, type: 3}
+      propertyPath: playerInputManager
+      value: 
+      objectReference: {fileID: 1103561196}
     - target: {fileID: 911548435801935404, guid: 275c8cb4e3ff1c145a9198d184562ec9, type: 3}
       propertyPath: m_Name
       value: Player
