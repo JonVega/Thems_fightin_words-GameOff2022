@@ -25,14 +25,14 @@ public class PlayerController : MonoBehaviour
     bool isGrounded;
     Vector3 velocity;
 
-    private List<PlayerInput> players = new List<PlayerInput>();
+
+    public List<PlayerInput> players = new List<PlayerInput>();
 
     private void Awake() {
         //note: inputAction asset is not static or global
         inputAsset = this.GetComponent<PlayerInput>().actions;
         player = inputAsset.FindActionMap("Player");
         playerInputManager = FindObjectOfType<PlayerInputManager>();
-        
     }
 
     private void OnEnable() {
@@ -92,15 +92,8 @@ public class PlayerController : MonoBehaviour
     }
     
     private void AddPlayer(PlayerInput player) {
-        if(players.Count == 0) { //when the game starts this runs
-            player.transform.GetChild(0).gameObject.SetActive(true); //turn on Almanac model
-            player.transform.GetChild(1).gameObject.SetActive(false); //turn off Zasshi model
-        }
-        else { //when a second player enters the game, run these
-            player.transform.GetChild(1).gameObject.SetActive(true); //turn on Zasshi model
-            player.transform.GetChild(0).gameObject.SetActive(false); //turn off Almanac model
-            
-        }
+        player.transform.GetChild(0).gameObject.SetActive(false); //turn off Almanac model
+        player.transform.GetChild(1).gameObject.SetActive(true); //turn on Zasshi model
         players.Add(player);
     }
 }
