@@ -7,16 +7,16 @@ public class PlayerController : MonoBehaviour
     /* Action Map */
     public InputActionAsset inputAsset;
     public InputActionMap player;
-    public InputAction movement;
-    public InputAction looking;
     public PlayerInputManager playerInputManager;
 
     public List<PlayerInput> players = new List<PlayerInput>();
 
     public bool isJump {get; private set;} = false;
+    public bool isSprint {get; private set;} = false;
+    public Vector2 setMove {get; private set;} = Vector2.zero;
+    public Vector2 setLook {get; private set;} = Vector2.zero;
 
     private void Awake() {
-        //note: inputAction asset is not static or global
         inputAsset = this.GetComponent<PlayerInput>().actions;
         player = inputAsset.FindActionMap("Player");
         playerInputManager = FindObjectOfType<PlayerInputManager>();
@@ -24,9 +24,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable() {
         player.Enable();
-        movement = player.FindAction("Movement");
-        looking = player.FindAction("Looking");
+        player.FindAction("Looking").performed += SetLook;
+        player.FindAction("Movement").performed += SetMove;
         player.FindAction("Jump").performed += DoJump; //subscribe to event
+        player.FindAction("Sprint").performed += DoSprint;
         
         playerInputManager.onPlayerJoined += AddPlayer;
 
@@ -36,12 +37,27 @@ public class PlayerController : MonoBehaviour
     }
 
     private void OnDisable() {
+        player.FindAction("Looking").performed -= SetLook;
+        player.FindAction("Movement").performed -= SetMove;
         player.FindAction("Jump").performed -= DoJump;
+        player.FindAction("Sprint").performed -= DoSprint;
         player.Disable();
     }
 
-    private void DoJump(InputAction.CallbackContext ctx) {
+    private void DoJump (InputAction.CallbackContext ctx) {
         isJump = ctx.ReadValueAsButton();
+    }
+
+    private void DoSprint (InputAction.CallbackContext ctx) {
+        isSprint = ctx.ReadValueAsButton();
+    }
+
+    private void SetMove (InputAction.CallbackContext ctx) {
+        setMove = ctx.ReadValue<Vector2>();
+    }
+
+    private void SetLook (InputAction.CallbackContext ctx) {
+        setLook = ctx.ReadValue<Vector2>();
     }
     
     private void AddPlayer(PlayerInput player) {

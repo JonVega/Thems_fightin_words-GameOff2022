@@ -5,21 +5,21 @@ using UnityEngine;
 public class Jump : MonoBehaviour
 {
     public GameObject player;
-    private PlayerController pc;
-    private Move mv;
+    private PlayerController playerController;
+    private PlayerPhysics playerPhysics;
 
     private float jumpHeight = 2.0f;
     
     void Start()
     {
-        pc = player.GetComponent<PlayerController>();
-        mv = player.GetComponent<Move>();
+        playerController = player.GetComponent<PlayerController>();
+        playerPhysics = player.GetComponent<PlayerPhysics>();
     }
 
     void Update()
     {   
-        if(pc.isJump && mv.isGrounded) {
-            mv.velocity.y = Mathf.Sqrt(jumpHeight * -2f * mv.gravity);
+        if(playerController.isJump && playerPhysics.isGrounded) {
+            playerPhysics.velocity.y = Mathf.Sqrt(jumpHeight * -2f * playerPhysics.gravity);
         }
     }
 }

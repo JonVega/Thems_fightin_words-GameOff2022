@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class Look : MonoBehaviour
 {
-    public PlayerController playerController;
+    //public PlayerController playerController;
+
+    public GameObject player;
+    private PlayerController playerController;
     public Transform playerBody;
     public Camera cam;
-    public float mouseSensitivity = 60f;
+    
+    [SerializeField] float mouseSensitivity = 60f; //[SerializeField] means private but show in UnityEditor
     private float xRotation = 0f;
+    private float mouseX = 0f;
+    private float mouseY = 0f;
 
-    // Update is called once per frame
+    void Start() {
+        playerController = player.GetComponent<PlayerController>();
+    }
+
     void Update()
     {
-        float mouseX = playerController.looking.ReadValue<Vector2>().x * mouseSensitivity * Time.deltaTime;
-        float mouseY = playerController.looking.ReadValue<Vector2>().y * mouseSensitivity * Time.deltaTime;
+        mouseX = playerController.setLook.x * mouseSensitivity * Time.deltaTime;
+        mouseY = playerController.setLook.y * mouseSensitivity * Time.deltaTime;
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        playerBody.Rotate(Vector3.up * playerController.looking.ReadValue<Vector2>().x);
+        playerBody.Rotate(Vector3.up * playerController.setLook.x);
     }
 }

@@ -784,17 +784,6 @@ CharacterController:
   m_CorrespondingSourceObject: {fileID: 911548435801935377, guid: 275c8cb4e3ff1c145a9198d184562ec9, type: 3}
   m_PrefabInstance: {fileID: 911548437274391922}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1489304425 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 911548435801935383, guid: 275c8cb4e3ff1c145a9198d184562ec9, type: 3}
-  m_PrefabInstance: {fileID: 911548437274391922}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1489304414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31e6ca699037e554c89c9545e18016d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1489304426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -807,7 +796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0d3a507330920b41ab59bc55c55dd1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 1489304425}
+  player: {fileID: 1489304414}
   playerBody: {fileID: 1489304422}
   cam: {fileID: 1032888994}
   mouseSensitivity: 60
@@ -823,12 +812,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee47d0b09c29b341ab8d1fd6a403780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 1489304425}
   playerGroundCheck: {fileID: 547148327}
   groundMask:
     serializedVersion: 2
     m_Bits: 8
   controller: {fileID: 1489304424}
+  player: {fileID: 1489304414}
 --- !u!114 &1489304428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842,6 +831,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1489304414}
+--- !u!114 &1489304430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489304414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ef4a3b5e00b43f4a858e88c0e4777a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 9
+  groundDistance: 0.4
+  gravity: -19.62
+  velocity: {x: 0, y: 0, z: 0}
+  isGrounded: 0
 --- !u!1 &1707272142
 GameObject:
   m_ObjectHideFlags: 0
